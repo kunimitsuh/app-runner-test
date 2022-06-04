@@ -1,6 +1,7 @@
 package main
 
 import (
+	"kunimitsuh/app-runner-test/connection"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -26,6 +27,15 @@ func setupRouter() *gin.Engine {
 
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{})
+	})
+
+	router.GET("/health/check/deep", func(c *gin.Context) {
+		db, err := connection.DbInit()
+		if err != nil {
+			c.String(http.StatusInternalServerError, "DB connection error")
+			return
+		}
+		c.String(http.StatusOK, db.Name())
 	})
 
 	return router
