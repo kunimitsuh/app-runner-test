@@ -24,6 +24,7 @@ FROM alpine as prod
 
 WORKDIR /app
 
+COPY --from=builder /app/.env ./.env
 COPY --from=builder /app/templates/* ./templates/
 COPY --from=builder /app/main ./
 

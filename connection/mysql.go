@@ -10,9 +10,9 @@ import (
 )
 
 type DatabaseInfo struct {
-	Host string
-	DBName string
-	User string
+	Host     string
+	DBName   string
+	User     string
 	Password string
 }
 
@@ -29,7 +29,7 @@ func DbInit() (*gorm.DB, error) {
 	if err != nil {
 		log.Printf("DB connection error: %v", err.Error())
 	}
-	
+
 	return db, err
 }
 
